@@ -20,7 +20,6 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
@@ -41,11 +40,12 @@ public class DispatcherServletInit implements  WebMvcConfigurer {
 	public ViewResolver viewResolver() {
 		
 		InternalResourceViewResolver view_resolver = new InternalResourceViewResolver();
-		view_resolver.setPrefix("WEB-INF/view/");
+		view_resolver.setPrefix("/WEB-INF/view/");
 		view_resolver.setSuffix(".jsp");
 		return view_resolver;
 		
 	}
+	
 	
 	@Bean
 	public DataSource myDataSource() {
