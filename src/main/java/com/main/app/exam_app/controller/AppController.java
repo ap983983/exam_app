@@ -90,7 +90,5 @@ public class AppController {
 		return model_view; 
 	}
 	
-	
-	
 }
 
