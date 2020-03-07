@@ -1,5 +1,6 @@
 package com.main.app.exam_app.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -74,7 +75,13 @@ public class Courses {
 		this.courseQuestions = courseQuestions;
 	}
 	
-	
+	public void add(CourseQuestions tempQuestion) {
+		
+		if(tempQuestion == null)
+			courseQuestions = new ArrayList<>();
+		courseQuestions.add(tempQuestion);
+		tempQuestion.setCourse(this);
+	}
 	
 
 }

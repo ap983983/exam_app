@@ -8,7 +8,6 @@ public interface CourseQuestionsDAO {
 	
 	List<CourseQuestions> getCourseQuestions();
 	CourseQuestions getCourseQuestion(int questionId);
-	void insertCourseQuestions(CourseQuestions coursequestion);
-	void updateCourseQuestions(CourseQuestions courseQuestion);
+	void updateOrInsertCourseQuestions(int courseId, CourseQuestions courseQuestion);
 	void deleteCourseQuestions(int questionId);
 }

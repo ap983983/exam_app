@@ -5,11 +5,9 @@
 
 <body>
 
-<!--  
-	<button onclick="window.location.href='${pageContext.request.contextPath}/admin/showForm'" >Add Customer</button>
+  
+	<button onclick="window.location.href='${pageContext.request.contextPath}/admin/showInsertForm?course_id=${course_id}'" >Add Customer</button>
 	
--->
-
 	<table border="1">
 	
 	<tr>
@@ -28,10 +26,12 @@
 
 			<c:url var="updateLink" value="/admin/showUpdateForm">
 				<c:param name="questionId" value="${itr.questionId}"></c:param>
+				<c:param name="course_id" value="${course_id}"></c:param>
 			</c:url>
 			
 			<c:url var="deleteLink" value="/admin/deleteQuestion">
 				<c:param name="questionId" value="${itr.questionId}"></c:param>
+				<c:param name="course_id" value="${course_id}"></c:param>
 			</c:url>
 			
 		<tr>

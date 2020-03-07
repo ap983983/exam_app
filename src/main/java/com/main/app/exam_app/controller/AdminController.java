@@ -54,37 +54,55 @@ public class AdminController {
 	
 		Courses course = courseDAO.getCourse(courseId);
 		model_view.addObject("questions_list", course.getCourseQuestions());
+		model_view.addObject("course_id",courseId);
 		model_view.setViewName("admin/question_list");
 		return model_view;
 		
 	}
 	
-	@GetMapping("/showUpdateForm")
-	public ModelAndView showQuestionForm(@RequestParam("questionId") int questionId, ModelAndView model_view) {
+	@GetMapping("/showUpdateForm")	
+	public ModelAndView showQuestionForm(@RequestParam("course_id") int courseId,
+										 @RequestParam("questionId") int questionId, 
+										 ModelAndView model_view) {
 		
 		CourseQuestions courseQuestion = courseQuestionDAO.getCourseQuestion(questionId);
 		model_view.addObject("question", courseQuestion);
+		model_view.addObject("course_id",courseId);
 		model_view.setViewName("admin/questionform");
 		return model_view;
 	
 	}
 	
 	@PostMapping("/updateQuestion")
-	public ModelAndView updateQuestion(@ModelAttribute("question") CourseQuestions question, ModelAndView model_view) {
+	public ModelAndView updateQuestion(@RequestParam("course_id") int courseId,
+									   @ModelAttribute("question") CourseQuestions question, 
+									   ModelAndView model_view) {
 		
-		courseQuestionDAO.updateCourseQuestions(question);
-		model_view.setViewName("admin/question_list");
+		courseQuestionDAO.updateOrInsertCourseQuestions(courseId, question);
+		model_view.setViewName("redirect:courseQuestions?course_id=" + courseId);
 		return model_view;
 		
 	}
 	
 	@GetMapping("/deleteQuestion")
-	public ModelAndView deleteQuestion(@RequestParam("questionId") int questionId, ModelAndView model_view) {
+	public ModelAndView deleteQuestion(@RequestParam("course_id") int courseId,
+									   @RequestParam("questionId") int questionId, ModelAndView model_view) {
 		
 		courseQuestionDAO.deleteCourseQuestions(questionId);
-		model_view.setViewName("admin/question_list");
+		model_view.addObject("course_id",courseId);
+		model_view.setViewName("redirect:courseQuestions");
 		return model_view;
 		
+	}
+	
+	@GetMapping("/showInsertForm")
+	public ModelAndView showQuestionForm(@RequestParam("course_id") int courseId, ModelAndView model_view) {
+		
+		CourseQuestions question_form = new CourseQuestions();
+		model_view.addObject("question",question_form);
+		model_view.addObject("course_id",courseId);
+		model_view.setViewName("admin/questionform");
+		return model_view;
 	}
 	
 }

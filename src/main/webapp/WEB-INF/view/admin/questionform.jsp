@@ -5,8 +5,11 @@
 
 <body>
 
+	<c:url var="updateQuestionLink" value="updateQuestion">
+		<c:param name="course_id" value="${course_id}"></c:param>
+	</c:url>
 
-	<form:form action="updateQuestion" modelAttribute="question" method="POST">
+	<form:form action="${updateQuestionLink}" modelAttribute="question" method="POST">
 	
 		QID:<form:input path="questionId"/>
 		QNAME:<form:input path="questionName"/><br><br>

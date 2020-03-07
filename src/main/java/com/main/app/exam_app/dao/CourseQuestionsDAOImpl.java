@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.main.app.exam_app.entity.CourseQuestions;
+import com.main.app.exam_app.entity.Courses;
 
 @Repository
 public class CourseQuestionsDAOImpl implements CourseQuestionsDAO {
@@ -34,17 +35,11 @@ public class CourseQuestionsDAOImpl implements CourseQuestionsDAO {
 	}
 
 	@Transactional
-	public void insertCourseQuestions(CourseQuestions coursequestion) {
+	public void updateOrInsertCourseQuestions(int courseId,CourseQuestions courseQuestion) {
 		
 		Session session = sessionFactory.getCurrentSession();
-		session.save(coursequestion);
-
-	}
-
-	@Transactional
-	public void updateCourseQuestions(CourseQuestions courseQuestion) {
-
-		Session session = sessionFactory.getCurrentSession();
+		Courses course = session.get(Courses.class, courseId);
+		course.add(courseQuestion);
 		session.saveOrUpdate(courseQuestion);
 
 	}
