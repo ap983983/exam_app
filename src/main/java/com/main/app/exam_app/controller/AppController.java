@@ -90,5 +90,13 @@ public class AppController {
 		return model_view; 
 	}
 	
+	@PostMapping("/explore")
+	public ModelAndView exploreResult(@RequestParam("questionList") CourseQuestionList questionList, ModelAndView model_view) {
+		
+		model_view.addObject("correctlist",questionList);
+		model_view.setViewName("user/explore");
+		return model_view;
+	}
+	
 }
 

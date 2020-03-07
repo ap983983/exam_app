@@ -5,6 +5,6 @@
 <h1>Results</h1>
 
 ${result}
-<a href="explore">Explore</a>
+<a href="explore?questionList=${selectedoptions}">Explore</a>
 </body>
 </html>
