@@ -1,19 +1,22 @@
 package com.main.app.exam_app.dao;
 
 import java.util.List;
-
+import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.main.app.exam_app.entity.CourseQuestions;
+import com.main.app.exam_app.entity.Courses;
 
+@Repository
 public class CourseQuestionsDAOImpl implements CourseQuestionsDAO {
 
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	@Override
+	@Transactional
 	public List<CourseQuestions> getCourseQuestions() {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -22,7 +25,7 @@ public class CourseQuestionsDAOImpl implements CourseQuestionsDAO {
 		
 	}
 
-	@Override
+	@Transactional
 	public CourseQuestions getCourseQuestion(int questionId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -31,31 +34,17 @@ public class CourseQuestionsDAOImpl implements CourseQuestionsDAO {
 		
 	}
 
-	@Override
-	public void insertCourseQuestions(CourseQuestions coursequestion) {
+	@Transactional
+	public void updateOrInsertCourseQuestions(int courseId,CourseQuestions courseQuestion) {
 		
 		Session session = sessionFactory.getCurrentSession();
-		session.save(coursequestion);
+		Courses course = session.get(Courses.class, courseId);
+		course.add(courseQuestion);
+		session.saveOrUpdate(courseQuestion);
 
 	}
 
-	@Override
-	public void updateCourseQuestions(int questionId, String questionName, String option1, String option2,
-			String option3, String option4, int correct_option) {
-
-		Session session = sessionFactory.getCurrentSession();
-		CourseQuestions question_update = session.get(CourseQuestions.class, questionId);
-		question_update.setQuestionName(questionName);
-		question_update.setQuestionOption1(option1);
-		question_update.setQuestionOption2(option2);
-		question_update.setQuestionOption3(option3);
-		question_update.setQuestionOption4(option4);
-		question_update.setQuestionCorrectOption(correct_option);
-		session.saveOrUpdate(question_update);
-
-	}
-
-	@Override
+	@Transactional
 	public void deleteCourseQuestions(int questionId) {
 		
 		Session session = sessionFactory.getCurrentSession();

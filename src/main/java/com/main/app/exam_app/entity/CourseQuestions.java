@@ -41,7 +41,7 @@ public class CourseQuestions {
 			   CascadeType.MERGE,
 			   CascadeType.PERSIST,
 			   CascadeType.REFRESH})
-	@JoinColumn(name="course_id")
+	@JoinColumn(name="course_id",nullable=false,updatable=false)
 	private Courses course;
 
 	public CourseQuestions() {
@@ -103,5 +103,15 @@ public class CourseQuestions {
 	public void setQuestionCorrectOption(Integer questionCorrectOption) {
 		this.questionCorrectOption = questionCorrectOption;
 	}
+
+	public Courses getCourse() {
+		return course;
+	}
+
+	public void setCourse(Courses course) {
+		this.course = course;
+	}
+	
+	
 
 }

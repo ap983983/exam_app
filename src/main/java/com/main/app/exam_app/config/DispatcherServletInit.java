@@ -20,7 +20,6 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
@@ -29,8 +28,6 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @ComponentScan(basePackages="com.main.app.exam_app")
 @PropertySource({ "classpath:persistence-mysql.properties"})
 public class DispatcherServletInit implements  WebMvcConfigurer {
-
-	
 
 	@Autowired
 	private Environment env;
@@ -41,11 +38,11 @@ public class DispatcherServletInit implements  WebMvcConfigurer {
 	public ViewResolver viewResolver() {
 		
 		InternalResourceViewResolver view_resolver = new InternalResourceViewResolver();
-		view_resolver.setPrefix("WEB-INF/view/");
+		view_resolver.setPrefix("/WEB-INF/view/");
 		view_resolver.setSuffix(".jsp");
 		return view_resolver;
 		
-	}
+	}	
 	
 	@Bean
 	public DataSource myDataSource() {
@@ -79,30 +76,23 @@ public class DispatcherServletInit implements  WebMvcConfigurer {
 		return myDataSource;
 	}
 	
-	
 	private Properties getHibernateProperties() {
 
 		// set hibernate properties
 		Properties props = new Properties();
-
 		props.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
 		props.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
 		props.setProperty("hibernate.enable_lazy_load_no_trans", env.getProperty("hibernate.enable_lazy_load_no_trans"));
-		
 		return props;				
 	}
 
-	
 	// need a helper method 
-	// read environment property and convert to int
-	
+	// read environment property and convert to int	
 	private int getIntProperty(String propName) {
 		
-		String propVal = env.getProperty(propName);
-		
+		String propVal = env.getProperty(propName);		
 		// now convert to int
 		int intPropVal = Integer.parseInt(propVal);
-		
 		return intPropVal;
 	}	
 	

@@ -6,12 +6,10 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.main.app.exam_app.dao.CourseSectionDAO;
@@ -22,6 +20,7 @@ import com.main.app.exam_app.entity.CourseSections;
 import com.main.app.exam_app.entity.Courses;
 
 @Controller
+@RequestMapping("/users")
 public class AppController {
 
 	@Autowired
@@ -50,7 +49,7 @@ public class AppController {
 			System.out.println(itr1.getValue());
 		}
 		model.addObject("course_chart", course_chart);
-		model.setViewName("dashboard");
+		model.setViewName("user/dashboard");
 		return model;
 	}
 	
@@ -62,7 +61,7 @@ public class AppController {
 		CourseQuestionList questionsList = new CourseQuestionList();
 		questionsList.setCourseQuestion(questions);
 		model_view.addObject("course_question_list", questionsList);
-		model_view.setViewName("course_questions");
+		model_view.setViewName("user/course_questions");
 		return model_view;
 	}
 	
@@ -87,11 +86,9 @@ public class AppController {
 		}
 		model_view.addObject("selectedoptions",questionList);
 		model_view.addObject("result", result);
-		model_view.setViewName("results");
+		model_view.setViewName("user/results");
 		return model_view; 
 	}
-	
-	
 	
 }
 
