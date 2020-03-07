@@ -29,8 +29,6 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @PropertySource({ "classpath:persistence-mysql.properties"})
 public class DispatcherServletInit implements  WebMvcConfigurer {
 
-	
-
 	@Autowired
 	private Environment env;
 	
@@ -44,8 +42,7 @@ public class DispatcherServletInit implements  WebMvcConfigurer {
 		view_resolver.setSuffix(".jsp");
 		return view_resolver;
 		
-	}
-	
+	}	
 	
 	@Bean
 	public DataSource myDataSource() {
@@ -79,30 +76,23 @@ public class DispatcherServletInit implements  WebMvcConfigurer {
 		return myDataSource;
 	}
 	
-	
 	private Properties getHibernateProperties() {
 
 		// set hibernate properties
 		Properties props = new Properties();
-
 		props.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
 		props.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
 		props.setProperty("hibernate.enable_lazy_load_no_trans", env.getProperty("hibernate.enable_lazy_load_no_trans"));
-		
 		return props;				
 	}
 
-	
 	// need a helper method 
-	// read environment property and convert to int
-	
+	// read environment property and convert to int	
 	private int getIntProperty(String propName) {
 		
-		String propVal = env.getProperty(propName);
-		
+		String propVal = env.getProperty(propName);		
 		// now convert to int
 		int intPropVal = Integer.parseInt(propVal);
-		
 		return intPropVal;
 	}	
 	

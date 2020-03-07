@@ -49,7 +49,7 @@ public class AppController {
 			System.out.println(itr1.getValue());
 		}
 		model.addObject("course_chart", course_chart);
-		model.setViewName("dashboard");
+		model.setViewName("user/dashboard");
 		return model;
 	}
 	
@@ -61,7 +61,7 @@ public class AppController {
 		CourseQuestionList questionsList = new CourseQuestionList();
 		questionsList.setCourseQuestion(questions);
 		model_view.addObject("course_question_list", questionsList);
-		model_view.setViewName("course_questions");
+		model_view.setViewName("user/course_questions");
 		return model_view;
 	}
 	
@@ -86,7 +86,7 @@ public class AppController {
 		}
 		model_view.addObject("selectedoptions",questionList);
 		model_view.addObject("result", result);
-		model_view.setViewName("results");
+		model_view.setViewName("user/results");
 		return model_view; 
 	}
 	
